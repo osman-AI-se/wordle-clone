@@ -1,0 +1,16 @@
+<!-- Test -->
+<h1>This is game page!</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wordle Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <h2>Wordle Game</h2>
+    <div id="game"></div>
+
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
