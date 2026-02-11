@@ -354,6 +354,20 @@ En feature är klar när:
 - **Statistik**: Kanske senare, fokus på grundspelet först
 - **Focus**: Agilt arbetssätt viktigare än perfekt produkt!
 
+  Logic: 
+  Frontend (JS)
+      ↓
+  POST /guess
+      ↓
+  Flask (Backend)
+      ↓
+  GameRules
+      ↓
+  JSON response
+      ↓
+  Frontend update UI
+
+
 ---
 
 ## ✨ Lycka till!
