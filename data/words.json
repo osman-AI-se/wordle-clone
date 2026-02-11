@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "description": "Wordle word list",
+  "language": "en",
+  "answers": [
+    "robot", "hello", "world", "crane", "about",
+    "above", "abuse", "actor", "acute", "admit",
+    "adopt", "adult", "after", "again", "agent",
+    "agree", "ahead", "alarm", "album", "alert",
+    "alien", "align", "alike", "alive", "allow",
+    "alone", "along", "alter", "angel", "anger",
+    "angle", "angry", "apart", "apple", "apply",
+    "arena", "argue", "arise", "array", "aside",
+    "asset", "audio", "avoid", "award", "aware",
+    "badly", "baker", "bases", "basic", "basis"
+  ],
+  "valid_words": [
+    "robot", "hello", "world", "crane", "about",
+    "above", "abuse", "actor", "acute", "admit",
+    "adopt", "adult", "after", "again", "agent",
+    "agree", "ahead", "alarm", "album", "alert",
+    "alien", "align", "alike", "alive", "allow",
+    "alone", "along", "alter", "angel", "anger",
+    "angle", "angry", "apart", "apple", "apply",
+    "arena", "argue", "arise", "array", "aside",
+    "asset", "audio", "avoid", "award", "aware",
+    "badly", "baker", "bases", "basic", "basis",
+    "floor", "speed", "erase", "wrong", "sleek",
+    "creep", "toast", "beach", "climb", "frost"
+  ],
+  "metadata": {
+    "total_answers": 50,
+    "total_valid_words": 60,
+    "word_length": 5
+  }
+}
