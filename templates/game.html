@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Game</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer src="{{ url_for('static', filename='js/game.js') }}"></script>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Wordle</h1>
+    </header>
+
+    <main class="game-container">
+
+        <div class="grid">
+            {% for row in range(6) %}
+                {% for col in range(5) %}
+                    <div class="box empty"></div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+
+        
+    </main>
+
+</body>
+</html>
