@@ -1,4 +1,4 @@
-const dictionary = ['earth', 'forest', 'candy', 'schoo','house'];
+const dictionary = ['earth', 'fores', 'candy', 'schoo'];
 const state = {
     secret: dictionary[Math.floor(Math.random()* dictionary.length)],
     grid: Array(6)
@@ -74,7 +74,7 @@ function KeyboardEvents(guess)
     };
 }
 function getCurrentWord(){
-    return state.grid[state.currentRow].reduce((prev,curr) => prev + curr);
+    return state.grid[state.currentRow].reduce((prev,curr) => prev + curr).toLowerCase();
 }
 function isWordValid(word){
     return dictionary.includes(word);
@@ -82,11 +82,15 @@ function isWordValid(word){
 }
 function revealWord(guess){
     const row = state.currentRow;
+    const animation_duration = 500; // ms
 
     for(let i = 0; i < 5; i++){
         const box = document.getElementById(`box${row}${i}`);
-        const letter = box.textContent;
+        const letter = box.textContent.toLowerCase();
+        setTimeout(() =>
+    {
 
+      
         if (letter === state.secret[i]){
             box.classList.add('right');
             
@@ -97,16 +101,25 @@ function revealWord(guess){
         else {
             box.classList.add('empty');
         }
+    },  ((i + 1) * animation_duration) / 2);
+
+    box.classList.add('animated');
+    box.style.animationDelay = `${(i * animation_duration) / 2}ms`; 
+
+
+
     }
     const isWinner = state.secret === guess;
     const isOver = state.secret === 5;
 
-    if (isWinner){
+    setTimeout(() => {
+        if (isWinner){
         alert('Congratulations you won!')
     }
     else if (isOver){
         alert(`You lost, the correct word was ${state.secret}`)
     }
+},3 * animation_duration);
 }
 function isLetter(key)
 {
@@ -116,7 +129,7 @@ function isLetter(key)
 function addLetter(letter)
 {
      if(state.currentColumn === 5) return;
-     state.grid[state.currentRow][state.currentColumn] = letter;
+     state.grid[state.currentRow][state.currentColumn] = letter.toUpperCase();
      state.currentColumn++;
 }
 
@@ -141,7 +154,7 @@ function initGame() //startar spelet
     }
 
     KeyboardEvents();
-    console.log(state.secret);
+
 
 
    
