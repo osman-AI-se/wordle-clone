@@ -11,22 +11,65 @@
 <body>
 
     <header class="header">
-        <h1>Wordle</h1>
+        <div class="header-inner">
+            <h1 class="logo">Wordle</h1>
+            <div class="header-actions">
+                <button class="icon-btn" id="btnHelp" aria-label="Help">?</button>
+                <button class="icon-btn" id="btnReset" aria-label="New game">↻</button>
+            </div>
+        </div>
     </header>
 
     <main class="game-container">
 
-        <div class="grid">
+        <section class="board" aria-label="Wordle board">
+            <div class="grid" id="grid" role="grid" aria-label="Guess grid">
             {% for row in range(6) %}
                 {% for col in range(5) %}
-                    <div class="box empty"></div>
+                <div class="tile empty" data-row="{{ row }}" data-col="{{ col }}" role="gridcell" aria-label="Empty"></div>
                 {% endfor %}
             {% endfor %}
-        </div>
+            </div>
+        </section>
+
+        <section class="keyboard" aria-label="Keyboard">
+            <div class="kb-row">
+                {% for k in ["Q","W","E","R","T","Y","U","I","O","P"] %}
+                <button class="key" data-key="{{ k }}">{{ k }}</button>
+                {% endfor %}
+            </div>
+            <div class="kb-row">
+                <div class="spacer"></div>
+                {% for k in ["A","S","D","F","G","H","J","K","L"] %}
+                <button class="key" data-key="{{ k }}">{{ k }}</button>
+                {% endfor %}
+                <div class="spacer"></div>
+            </div>
+            <div class="kb-row">
+                <button class="key key-wide" data-key="ENTER">Enter</button>
+                {% for k in ["Z","X","C","V","B","N","M"] %}
+                <button class="key" data-key="{{ k }}">{{ k }}</button>
+                {% endfor %}
+                <button class="key key-wide" data-key="BACKSPACE">⌫</button>
+            </div>
+        </section>
 
 
 
     </main>
+
+    <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+
+    <div class="modal-backdrop hidden" id="modalBackdrop" role="dialog" aria-modal="true">
+        <div class="modal">
+        <h2 id="modalTitle">Game Over</h2>
+        <p id="modalText"></p>
+        <div class="modal-actions">
+            <button class="btn" id="btnPlayAgain">Play again</button>
+            <button class="btn btn-secondary" id="btnCloseModal">Close</button>
+        </div>
+        </div>
+    </div>
 
 </body>
 </html>
