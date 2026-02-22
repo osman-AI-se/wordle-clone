@@ -45,6 +45,60 @@ function drawGrid(container)
     container.appendChild(grid);
 }
 
+function drawKeyboard(container) {
+    const keyboard = document.createElement('div');
+    keyboard.className = 'keyboard';
+
+    const rows = [
+        ['Q','W','E','R','T','Y','U','I','O','P'],
+        ['A','S','D','F','G','H','J','K','L'],
+        ['Enter','Z','X','C','V','B','N','M','Backspace']
+    ];
+
+    rows.forEach(rowKeys => {
+        const row = document.createElement('div');
+        row.className = 'keyboard-row';
+        rowKeys.forEach(key => {
+            const keyBtn = document.createElement('button');
+            keyBtn.className = 'key';
+            keyBtn.textContent = key;
+            keyBtn.dataset.key = key;
+            keyBtn.addEventListener('click', () => {
+                if (key === 'Enter') {
+                    if (state.currentColumn === 5) {
+                        const word = getCurrentWord();
+                        if (isWordValid(word)) {
+                            revealWord(word);
+                            state.currentRow++;
+                            state.currentColumn = 0;
+                            updategrid();
+                        } else {
+                            alert(`${word} Its not a valid word, try again`);
+                        }
+                    }
+                    return;
+                }
+
+                if (key === 'Backspace') {
+                    removeLetter();
+                    updategrid();
+                    return;
+                }
+
+                
+                if (/^[a-zA-Z]$/.test(key)) {
+                    addLetter(key);
+                    updategrid();
+                }
+            });
+            row.appendChild(keyBtn);
+        });
+        keyboard.appendChild(row);
+    });
+
+    container.appendChild(keyboard);
+}
+
 function KeyboardEvents(guess)
 {
     document.body.onkeydown = (e) => {
@@ -146,6 +200,7 @@ function initGame() //startar spelet
     if(game)
         {
             drawGrid(game); 
+            drawKeyboard(game);
         }
         
     else 
@@ -168,81 +223,3 @@ document.addEventListener("DOMContentLoaded", initGame);
 
 
 
-
-/* ------------------  Hi Teams,  ------------------*/
-/* ------------------ I need something similar this block to connect backend -------------------
-
-document.addEventListener("keydown", handleKeyPress);
-
-function handleKeyPress(event) {
-    const key = event.key;
-
-    if (key === "Enter") {
-        submitGuess();
-        return;
-    }
-
-    if (key === "Backspace") {
-        if (state.currentColumn > 0) {
-            state.currentColumn--;
-            state.grid[state.currentRow][state.currentColumn] = '';
-            updateBox(state.currentRow, state.currentColumn, '');
-        }
-        return;
-    }
-
-    if (/^[a-zA-Z]$/.test(key) && state.currentColumn < 5) {
-        state.grid[state.currentRow][state.currentColumn] = key.toUpperCase();
-        updateBox(state.currentRow, state.currentColumn, key.toUpperCase());
-        state.currentColumn++;
-    }
-}
-
-function updateBox(row, column, letter) {
-    const box = document.getElementById(`box${row}${column}`);
-    box.textContent = letter;
-}
-
-function submitGuess() {
-    if (state.currentColumn !== 5) return;
-
-    const guessWord = state.grid[state.currentRow].join('');
-
-    fetch("/guess", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ guess: guessWord })
-    })
-    .then(response => response.json())
-    .then(data => {
-        handleResult(data);
-    });
-}
-
-function handleResult(data) {
-    if (!data.valid) {
-        alert(data.error);
-        return;
-    }
-
-    for (let i = 0; i < 5; i++) {
-        const box = document.getElementById(`box${state.currentRow}${i}`);
-        box.classList.add(data.result[i]);
-    }
-
-    if (data.status === "won") {
-        alert("You won!");
-        return;
-    }
-
-    if (data.status === "lost") {
-        alert("Game Over!");
-        return;
-    }
-
-    state.currentRow++;
-    state.currentColumn = 0;
-}
-    */
