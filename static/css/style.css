@@ -41,3 +41,54 @@ h1 {
 .box.right {
     background: var(--right)
 }
+
+
+:root {
+    --key-size: 64px; /* storleken för tangenterna*/
+    --key-gap: 10px;
+}
+
+.keyboard {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--key-gap);
+    max-width: 420px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--key-gap);
+}
+
+.key {
+    height: var(--key-size);
+    min-width: var(--key-size);
+    padding: 0 12px;
+    border-radius: 8px;
+    border: none;
+    background: #ddd;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+}
+
+.key[data-key="Enter"], .key[data-key="Backspace"] {
+    min-width: calc(var(--key-size) * 1.6);
+}
+
+.key:active {
+    transform: translateY(1px);
+}
+
+@media (max-width: 480px) {
+    :root { --key-size: 48px; }
+    .grid { max-width: 260px; }
+}
