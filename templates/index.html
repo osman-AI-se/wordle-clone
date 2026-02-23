@@ -6,17 +6,14 @@
   <title>Wordle Clone</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body class="page-landing">
-  <header class="header">
-    <a class="header-link" href="{{ url_for('index') }}">WORDLE</a>
-  </header>
 
   <main class="landing">
-    <h1 class="landing-title">Wordle Clone</h1>
-    <p class="landing-subtitle">Guess the 5-letter word in 6 tries.</p>
+    <h1 class="title">Wordle</h1>
+    <p class="subtitle">Guess the 5-letter word in 6 attempts.</p>
 
-    <a class="btn btn-ghost" href="{{ url_for('game') }}">Start game</a>
+    <a href="{{ url_for('game') }}" class="btn btn-primary">Start Game</a>
   </main>
+
 </body>
 </html>
