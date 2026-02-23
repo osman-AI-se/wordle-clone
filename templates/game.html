@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle Game</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wordle Game</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script defer src="{{ url_for('static', filename='js/game.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script defer src="{{ url_for('static', filename='js/game.js') }}"></script>
 </head>
-<body>
 
-    <header class="header">
-        <h1>Wordle</h1>
-    </header>
+<body class="page-game">
+  <header class="header"></header>  
 
-    <main class="game-container">
+  <main class="game-container">
+    <h1 class="game-title">Wordle</h1>
+    <p class="subtitle">Guess the 5-letter word in 6 attempts.</p>
 
-        <div class="grid">
-            {% for row in range(6) %}
-                {% for col in range(5) %}
-                    <div class="box empty"></div>
-                {% endfor %}
-            {% endfor %}
-        </div>
+    <div id="message" class="message"></div>
 
+    <section class="board">
+      <div class="grid" id="grid" aria-label="Wordle grid">
+        {% for row in range(6) %}
+          {% for col in range(5) %}
+            <div class="box empty" data-row="{{ row }}" data-col="{{ col }}"></div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </section>
 
-        
-    </main>
+    <section class="keyboard" id="keyboard" aria-label="On-screen keyboard">
+      <div class="keyboard-row">
+        {% for key in "QWERTYUIOP" %}
+          <button class="key" type="button" data-key="{{ key }}">{{ key }}</button>
+        {% endfor %}
+      </div>
 
+      <div class="keyboard-row">
+        {% for key in "ASDFGHJKL" %}
+          <button class="key" type="button" data-key="{{ key }}">{{ key }}</button>
+        {% endfor %}
+      </div>
+
+      <div class="keyboard-row">
+        <button class="key key-wide" type="button" data-key="Enter">Enter</button>
+        {% for key in "ZXCVBNM" %}
+          <button class="key" type="button" data-key="{{ key }}">{{ key }}</button>
+        {% endfor %}
+        <button class="key key-wide" type="button" data-key="Backspace">⌫</button>
+      </div>
+    </section>
+
+    <div class="game-actions">
+      <a class="btn btn-ghost" href="{{ url_for('game') }}">New Game</a>
+    </div>
+  </main>
 </body>
 </html>
