@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, jsonify
+from flask import Flask, redirect, render_template, request, session, jsonify
 from word_manager import WordManager
 from game_rules import GameRules
 
@@ -14,7 +14,7 @@ def index():
 
 
 @app.route('/game')
-def game(): # start new game
+def reset_game(): # reset game state
     
     target_word = word_manager.get_random_word()
 
@@ -24,6 +24,18 @@ def game(): # start new game
     session['game_over'] = False
     session['won'] = False
 
+    return render_template('game.html')
+
+
+@app.route('/new_game')
+def new_game():
+    reset_game()
+    return redirect('/game')
+
+
+@app.route('/game')
+def game():
+    reset_game()
     return render_template('game.html')
 
 
@@ -59,6 +71,8 @@ def guess():
     session['won'] = game.won
 
     return jsonify(result)
+
+
 
 
 if __name__ == "__main__":
