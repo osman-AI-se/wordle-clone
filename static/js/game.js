@@ -1,4 +1,4 @@
-const dictionary = ['earth', 'fores', 'candy', 'schoo'];
+
 const state = {
     secret: dictionary[Math.floor(Math.random()* dictionary.length)],
     grid: Array(6)
@@ -30,20 +30,6 @@ function createBox(container, row, column, letter = '')
         container.appendChild(box);
         return box;
     }
-function drawGrid(container)
-{
-    const grid = document.createElement('div');
-    grid.className = 'grid';
-
-    for(let i = 0; i < 6;i++)//antal rader
-    {
-        for(let j = 0; j < 5; j++) //antal kolumner 
-        {
-            createBox(grid,i,j);
-        }
-    }
-    container.appendChild(grid);
-}
 
 function drawKeyboard(container) {
     const keyboard = document.createElement('div');
@@ -199,7 +185,7 @@ function initGame() //startar spelet
     const game = document.getElementById('game');
     if(game)
         {
-            drawGrid(game); 
+          
             drawKeyboard(game);
         }
         
