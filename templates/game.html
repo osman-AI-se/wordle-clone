@@ -10,14 +10,18 @@
 </head>
 
 <body class="page-game">
-  <header class="header"></header>  
+  <header class="header">
+    <a class="header-link" href="{{ url_for('index') }}">WORDLE</a>
+  </header>
 
   <main class="game-container">
     <h1 class="game-title">Wordle</h1>
     <p class="subtitle">Guess the 5-letter word in 6 attempts.</p>
 
-    <div id="message" class="message"></div>
+    <!-- JS writes messages here -->
+    <div id="message" class="message" aria-live="polite"></div>
 
+    <!-- JS needs: #grid and .box[data-row][data-col] -->
     <section class="board">
       <div class="grid" id="grid" aria-label="Wordle grid">
         {% for row in range(6) %}
@@ -28,7 +32,8 @@
       </div>
     </section>
 
-    <section class="keyboard" id="keyboard" aria-label="On-screen keyboard">
+    <!-- JS needs: .key[data-key] buttons -->
+    <section class="keyboard" aria-label="On-screen keyboard">
       <div class="keyboard-row">
         {% for key in "QWERTYUIOP" %}
           <button class="key" type="button" data-key="{{ key }}">{{ key }}</button>
@@ -51,7 +56,9 @@
     </section>
 
     <div class="game-actions">
-      <a class="btn btn-ghost" href="{{ url_for('new_game') }}">New Game</a> <!-- replace href with: {{ url_for('new_game') }}-->
+      <!-- Use new_game only if you have that Flask route -->
+      <a class="btn btn-ghost" href="{{ url_for('game') }}">New Game</a>
+      {# If you really have it: <a class="btn btn-ghost" href="{{ url_for('new_game') }}">New Game</a> #}
     </div>
   </main>
 </body>
