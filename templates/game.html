@@ -10,15 +10,18 @@
 </head>
 
 <body class="page-game">
-  <header class="header"></header>  
+
+  <header class="header">
+    <a class="header-link" href="{{ url_for('index') }}">WORDLE</a>
+  </header>
 
   <main class="game-container">
     <h1 class="game-title">Wordle</h1>
     <p class="subtitle">Guess the 5-letter word in 6 attempts.</p>
 
-    <div id="message" class="message"></div>
+    <div id="message" class="message" aria-live="polite"></div>
 
-    <section class="board">
+    <section class="board" aria-label="Wordle board">
       <div class="grid" id="grid" aria-label="Wordle grid">
         {% for row in range(6) %}
           {% for col in range(5) %}
@@ -51,8 +54,13 @@
     </section>
 
     <div class="game-actions">
-      <a class="btn btn-ghost" href="{{ url_for('new_game') }}">New Game</a> <!-- replace href with: {{ url_for('new_game') }}-->
+      <a class="btn btn-ghost" href="{{ url_for('new_game') }}">New Game</a>
     </div>
   </main>
+
+  <footer class="footer">
+    <p>© 2026 Wordle Clone</p>
+  </footer>
+
 </body>
 </html>
